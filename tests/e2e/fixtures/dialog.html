@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pixaloy fixture: modal dialog</title>
+    <style>
+      body {
+        margin: 0;
+        font: 16px/1.5 sans-serif;
+      }
+      dialog {
+        width: 90vw;
+        height: 90vh;
+        max-width: none;
+        max-height: none;
+        padding: 24px;
+        border: 0;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="behind">Text behind the dialog.</p>
+    <button id="open" type="button">Open dialog</button>
+    <dialog id="modal">
+      <h2 id="dialog-title">Modal dialog</h2>
+      <p id="dialog-text">This dialog covers most of the viewport.</p>
+    </dialog>
+    <script>
+      document.getElementById('open').addEventListener('click', () => {
+        document.getElementById('modal').showModal();
+      });
+      if (location.hash === '#open') document.getElementById('modal').showModal();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pixaloy fixture: palette</title>
+    <style>
+      html {
+        color: rgb(0, 0, 0);
+      }
+      body {
+        margin: 0;
+        padding: 16px;
+        color: rgb(17, 17, 17);
+        background-color: rgb(255, 255, 255);
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        font-family: Georgia, serif;
+      }
+      .rule {
+        border-top: 2px solid rgb(255, 0, 0);
+      }
+      button {
+        color: rgb(255, 255, 255);
+        background-color: rgb(0, 102, 204);
+        border: 2px solid rgb(0, 102, 204);
+        outline: 2px solid rgb(255, 0, 0);
+        font-family: system-ui;
+      }
+      a {
+        color: rgb(0, 102, 204);
+        background-color: transparent;
+      }
+      .gone {
+        display: none;
+        color: rgb(1, 2, 3);
+        background-color: rgb(4, 5, 6);
+      }
+      .ghost {
+        visibility: hidden;
+        color: rgb(7, 8, 9);
+      }
+      .faded {
+        opacity: 0;
+        color: rgb(10, 11, 12);
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="title">Palette</h1>
+    <p class="rule">Body copy</p>
+    <button type="button">Go</button>
+    <a href="#">Link</a>
+    <div class="gone"><span>Hidden</span></div>
+    <span class="ghost">Ghost</span>
+    <div class="faded">Faded</div>
+    <svg width="20" height="20"><rect width="20" height="20" fill="rgb(255, 0, 0)" /></svg>
+  </body>
+</html>
