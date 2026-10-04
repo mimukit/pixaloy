@@ -33,6 +33,7 @@ jobs:
           name: chrome-zip
           path: .output/*-chrome.zip
           if-no-files-found: error
+          include-hidden-files: true
 
   e2e:
     runs-on: ubuntu-latest
