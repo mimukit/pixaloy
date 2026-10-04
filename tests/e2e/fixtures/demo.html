@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fernbrook Coffee: fixture for the store screenshots</title>
+    <!-- A landing-page-like fixture for `pnpm screenshots`. Local CSS and system fonts only. -->
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        color: #23201c;
+        background: #fbf7f1;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        padding: 20px 48px;
+        border-bottom: 1px solid #e7dccb;
+      }
+      .logo {
+        font-family: Georgia, serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: #5b3a1e;
+      }
+      .nav a {
+        color: #6d6458;
+        font-size: 15px;
+        text-decoration: none;
+      }
+      .nav .cta {
+        margin-left: auto;
+        padding: 8px 16px;
+        border-radius: 999px;
+        color: #fff;
+        background: #2f6f4f;
+      }
+      .hero {
+        padding: 56px 48px 40px;
+        max-width: 760px;
+      }
+      .eyebrow {
+        margin: 0 0 12px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #c0692b;
+      }
+      h1 {
+        margin: 0 0 16px;
+        font-family: Georgia, serif;
+        font-size: 48px;
+        line-height: 1.1;
+        color: #3a2614;
+      }
+      .lead {
+        margin: 0 0 28px;
+        font-size: 18px;
+        line-height: 1.6;
+        color: #6d6458;
+      }
+      .actions {
+        display: flex;
+        gap: 12px;
+      }
+      .button {
+        display: inline-block;
+        padding: 12px 22px;
+        border: 2px solid #2f6f4f;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        color: #fff;
+        background: #2f6f4f;
+        box-shadow: 0 2px 6px rgb(47 111 79 / 0.25);
+      }
+      .button.ghost {
+        color: #2f6f4f;
+        background: transparent;
+        box-shadow: none;
+      }
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, 240px);
+        gap: 20px;
+        padding: 8px 48px 48px;
+      }
+      .card {
+        padding: 20px;
+        border: 1px solid #e7dccb;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 1px 2px rgb(58 38 20 / 0.08);
+      }
+      .card h3 {
+        margin: 12px 0 8px;
+        font-size: 17px;
+        color: #3a2614;
+      }
+      .card p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #6d6458;
+      }
+      .badge {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #c0692b;
+        background: #fbe7d6;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <span class="logo">Fernbrook</span>
+      <a href="#">Beans</a>
+      <a href="#">Subscriptions</a>
+      <a href="#">Brew guides</a>
+      <a class="cta" href="#">Sign in</a>
+    </nav>
+    <header class="hero">
+      <p class="eyebrow">Small-batch roasting</p>
+      <h1 id="headline">Coffee roasted on Monday, at your door by Thursday.</h1>
+      <p class="lead">
+        Single-origin beans from farms we visit every year. Pick a roast, set a schedule, and change
+        it whenever you like.
+      </p>
+      <div class="actions">
+        <a id="start" class="button" href="#">Start a subscription</a>
+        <a class="button ghost" href="#">See this week's beans</a>
+      </div>
+    </header>
+    <section class="features">
+      <article id="card-fresh" class="card">
+        <span class="badge">Fresh</span>
+        <h3>Roasted to order</h3>
+        <p>We roast after you order, never before. Every bag shows its roast date.</p>
+      </article>
+      <article id="card-fair" class="card">
+        <span class="badge">Fair</span>
+        <h3>Direct trade</h3>
+        <p>We pay farms above the fair-trade price and publish what we paid.</p>
+      </article>
+      <article class="card">
+        <span class="badge">Flexible</span>
+        <h3>Skip or pause</h3>
+        <p>Move a delivery or pause the plan from your account in two clicks.</p>
+      </article>
+    </section>
+  </body>
+</html>

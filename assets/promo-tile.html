@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pixaloy small promo tile (440x280)</title>
+    <!-- Source of store/promo-tile-440x280.png. `pnpm screenshots` renders it. -->
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 440px;
+        height: 280px;
+        overflow: hidden;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 18px;
+        padding: 0 40px;
+        box-sizing: border-box;
+        font-family:
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          Roboto,
+          Arial,
+          sans-serif;
+        color: #ffffff;
+        background-color: #0969da;
+        background-image:
+          linear-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgb(255 255 255 / 0.07) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .brand img {
+        width: 84px;
+        height: 84px;
+        border-radius: 20px;
+        box-shadow:
+          0 0 0 3px #ffffff,
+          0 8px 20px rgb(0 0 0 / 0.25);
+      }
+      h1 {
+        margin: 0;
+        font-size: 52px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      p {
+        margin: 0;
+        font-size: 22px;
+        line-height: 1.35;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="brand">
+      <img src="icon.svg" alt="" />
+      <h1>Pixaloy</h1>
+    </div>
+    <p>Inspect and copy CSS.<br />Free and local.</p>
+  </body>
+</html>
