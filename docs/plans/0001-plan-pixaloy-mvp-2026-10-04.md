@@ -77,7 +77,7 @@ Two alternatives were rejected:
 
 The account and store setup in Phase 5 has no code dependency. Start the Google account and the US$5 registration during Phase 2, so that the account is ready when the build is.
 
-### Phase 1: Repo bootstrap
+### Phase 1: Repo bootstrap (#1)
 
 - Rename the branch to `main` and create the public `mimukit/pixaloy` repo from this directory (`gh repo create mimukit/pixaloy --public --source .`).
 - Add an MIT licence and a README. The README says the extension is local-only and not for sale.
@@ -88,7 +88,7 @@ The account and store setup in Phase 5 has no code dependency. Start the Google 
 
 Done when: CI is green on `main`, `pnpm wxt zip` writes a Chrome zip, and the unpacked build loads in Chrome with no install warning.
 
-### Phase 2: Inspector core
+### Phase 2: Inspector core (#1)
 
 - On the toolbar click, the service worker injects the content script with `chrome.scripting.executeScript`. A second click or Esc removes it.
 - On a restricted page, the injection fails, and the service worker shows the `!` badge and the reason in the action title for 3 s.
@@ -100,7 +100,7 @@ Done when: CI is green on `main`, `pnpm wxt zip` writes a Chrome zip, and the un
 
 Done when: on the five Phase 2 test sites, a tester can hover, pin, move with the arrow keys, and exit, and the panel looks the same on each site. A Playwright test covers icon click, hover, pin, and Esc on a local fixture page. A second fixture page with an open `<dialog>` shows the overlay above the dialog.
 
-### Phase 3: Element panel and copy
+### Phase 3: Element panel and copy (#1)
 
 - The pinned panel shows the computed values in groups: layout, box, typography, colour, effects.
 - The style engine reads `getComputedStyle` and diffs it against the same-tag baseline from the hidden standards-mode iframe. It drops a property only when it equals that baseline. It collapses the fixed shorthand list.
@@ -109,7 +109,7 @@ Done when: on the five Phase 2 test sites, a tester can hover, pin, move with th
 
 Done when: unit tests cover the minimizer on at least 10 fixture elements, with one fixture per collapsed shorthand, and each passes. A fixture page with `* { box-sizing: border-box }` and a strict CSP gives a copy that keeps `box-sizing`. On the 10 Phase 3 test sites, the copied CSS for a chosen element renders the same in a blank page, judged by eye and recorded in `docs/qa/` with one line per site.
 
-### Phase 4: Page view
+### Phase 4: Page view (#1)
 
 - A second panel tab lists the page colours with usage counts, in HEX, RGB, HSL and OKLCH, through `culori`. Counting follows the colour counting rule in the design decisions.
 - The same tab lists the `font-family` stacks with usage counts, plus the size, weight and line-height of the pinned element. A note says that the rendered font comes in a later version.
@@ -117,7 +117,7 @@ Done when: unit tests cover the minimizer on at least 10 fixture elements, with 
 
 Done when: on a fixture page with known colours and fonts, including a hidden element and a `transparent` value that must not count, a unit test matches the counts exactly. On three of the test sites, the list matches what DevTools shows for five sampled elements.
 
-### Phase 5: Store readiness and private release
+### Phase 5: Store readiness and private release (#1)
 
 - Search CWS for "Pixaloy" and confirm that no item uses the name.
 - Write the privacy policy ("processed locally, nothing sent or stored remotely") and publish it on GitHub Pages at `mimukit.github.io/pixaloy/privacy/`.
@@ -137,7 +137,7 @@ Done when: the owner installs Pixaloy from the CWS listing as a trusted tester, 
 
 Done when: the public CWS URL installs Pixaloy in a clean Chrome profile, and GitHub Release `v0.1.0` carries the same zip with its checksum.
 
-### Phase 7: CI publishing on API v2
+### Phase 7: CI publishing on API v2 (#1)
 
 - Enable the Chrome Web Store API in a Google Cloud project and create a service account.
 - Add the service account email in the CWS Developer Dashboard, in the Account section. CWS allows one service account per publisher.
