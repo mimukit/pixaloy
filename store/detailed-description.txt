@@ -1,0 +1,31 @@
+Pixaloy inspects the CSS of any element on a live page and copies its styles as clean, standalone CSS. It is free, open source under the MIT licence, and runs entirely on your device.
+
+HOW IT WORKS
+
+Click the Pixaloy icon in the toolbar to start the inspector on the current tab. Click the icon again, or press Esc, to close it.
+
+INSPECT
+
+- Hover over an element to see its box model: margin, border, padding and content, plus the tag, classes and size.
+- Click to pin an element. Use the arrow keys to move to the parent, the first child, or a sibling.
+- Read the computed styles of the pinned element, grouped into layout, box, typography, colour and effects.
+
+COPY
+
+- Copy the element's minimized CSS. Pixaloy drops only the values that match the browser default for that tag, so the copied CSS looks the same when you paste it into a blank page.
+- Copy a unique CSS selector for the element.
+- Click any single value to copy it.
+
+PAGE VIEW
+
+- See every colour on the page with a usage count, in HEX, RGB, HSL and OKLCH. Click a colour to copy it.
+- See every font-family stack on the page with a usage count. Click a font to copy it.
+
+PRIVACY
+
+Pixaloy makes no network requests. There is no analytics, no account, no server and no paid tier. It runs only on the tab where you click the icon, and it writes to your clipboard only when you click a copy button.
+
+Privacy policy: https://mimukit.github.io/pixaloy/privacy/
+Source code and issues: https://github.com/mimukit/pixaloy
+
+Pixaloy is not for sale.

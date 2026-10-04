@@ -1,0 +1,1 @@
+Inspect CSS on any page, copy an element's minimized styles, and list page colours and fonts. Free, open source, fully local.

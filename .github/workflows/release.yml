@@ -1,0 +1,101 @@
+name: Release
+
+# Runs only on a version tag, for example v0.1.1. Never on a branch push or a pull request.
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Check that package.json version equals the tag
+        run: |
+          pkg_version="$(node -p "require('./package.json').version")"
+          tag_version="${GITHUB_REF_NAME#v}"
+          if [ "$pkg_version" != "$tag_version" ]; then
+            echo "::error::package.json version $pkg_version does not match tag $GITHUB_REF_NAME"
+            exit 1
+          fi
+          echo "Version $pkg_version matches tag $GITHUB_REF_NAME"
+
+      - run: pnpm build
+      - run: pnpm zip
+
+      - name: Find the Chrome zip
+        id: zip
+        run: |
+          shopt -s nullglob
+          zips=(.output/*-chrome.zip)
+          if [ "${#zips[@]}" -ne 1 ]; then
+            echo "::error::Expected one .output/*-chrome.zip, found ${#zips[@]}"
+            exit 1
+          fi
+          echo "path=${zips[0]}" >> "$GITHUB_OUTPUT"
+
+      # The v0.1.0 tag comes after the manual first upload, before the CWS secrets exist.
+      # With no CHROME_EXTENSION_ID secret, skip the submit and still publish the GitHub Release.
+      - name: Check for Chrome Web Store secrets
+        id: cws
+        env:
+          CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
+        run: |
+          if [ -n "$CHROME_EXTENSION_ID" ]; then
+            echo "has_cws_secrets=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_cws_secrets=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::CHROME_EXTENSION_ID is empty. Skipping the Chrome Web Store submit. The GitHub Release is still created."
+          fi
+
+      - name: Submit to the Chrome Web Store (API v2)
+        if: steps.cws.outputs.has_cws_secrets == 'true'
+        run: pnpm wxt submit --chrome-zip "$ZIP_PATH"
+        env:
+          ZIP_PATH: ${{ steps.zip.outputs.path }}
+          CHROME_API_VERSION: v2
+          CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
+          CHROME_PUBLISHER_ID: ${{ secrets.CHROME_PUBLISHER_ID }}
+          CHROME_SERVICE_ACCOUNT_CLIENT_EMAIL: ${{ secrets.CHROME_SERVICE_ACCOUNT_CLIENT_EMAIL }}
+          CHROME_SERVICE_ACCOUNT_PRIVATE_KEY: ${{ secrets.CHROME_SERVICE_ACCOUNT_PRIVATE_KEY }}
+
+      - name: Write the SHA-256 checksum
+        working-directory: .output
+        env:
+          ZIP_PATH: ${{ steps.zip.outputs.path }}
+        run: |
+          zip_name="$(basename "$ZIP_PATH")"
+          sha256sum "$zip_name" > "$zip_name.sha256"
+          cat "$zip_name.sha256"
+
+      - name: Attach the zip and checksum to the GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ZIP_PATH: ${{ steps.zip.outputs.path }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" "$ZIP_PATH" "$ZIP_PATH.sha256" --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" "$ZIP_PATH" "$ZIP_PATH.sha256" \
+              --verify-tag \
+              --title "Pixaloy $GITHUB_REF_NAME" \
+              --generate-notes
+          fi

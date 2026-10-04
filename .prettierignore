@@ -1,0 +1,10 @@
+.output
+.wxt
+node_modules
+pnpm-lock.yaml
+test-results
+playwright-report
+coverage
+*.zip
+# Markdown is hand-written and soft-wrapped; Prettier would re-pad tables.
+*.md
